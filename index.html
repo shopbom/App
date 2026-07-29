@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Y Browser</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+html,body{
+width:100%;
+height:100%;
+overflow:hidden;
+background:#fff;
+}
+
+#viewer{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:calc(100% - 65px);
+border:none;
+}
+
+.navigation{
+position:fixed;
+left:0;
+bottom:0;
+width:100%;
+height:65px;
+background:#fff;
+border-top:1px solid #ddd;
+display:flex;
+justify-content:space-around;
+align-items:center;
+box-shadow:0 -2px 10px rgba(0,0,0,.1);
+z-index:999;
+}
+
+.navigation a{
+flex:1;
+text-align:center;
+text-decoration:none;
+color:#666;
+padding:8px 0;
+}
+
+.navigation a.active{
+color:#2874F0;
+}
+
+.nav-icon{
+width:32px;
+height:32px;
+display:block;
+margin:auto;
+margin-bottom:4px;
+}
+
+.text{
+font-size:12px;
+font-weight:bold;
+}
+</style>
+</head>
+<body>
+
+<iframe id="viewer" src="https://shopbom.github.io/Me/"></iframe>
+
+<div class="navigation">
+
+<a href="#" class="active" data-url="https://shopbom.github.io/Me/">
+<img class="nav-icon" src="https://i.ibb.co/HfyPtfpZ/file-00000000be20720692ee8230e29da463.png">
+<span class="text">Home</span>
+</a>
+
+<a href="#" data-url="https://sites.google.com/view/bomoffer/home">
+<img class="nav-icon" src="https://i.ibb.co/d4YVmKfz/file-000000000c2472068ef64626c20e75dc.png">
+<span class="text">Offer</span>
+</a>
+
+<a href="#" data-url="https://sites.google.com/view/multigamestore/home">
+<img class="nav-icon" src="https://i.ibb.co/60ywts30/IMG-20260717-001730.png">
+<span class="text">Y Store</span>
+</a>
+
+</div>
+
+<script>
+const frame = document.getElementById("viewer");
+const links = document.querySelectorAll(".navigation a");
+
+links.forEach(link => {
+
+link.addEventListener("click", function(e){
+e.preventDefault();
+
+const url = this.dataset.url;
+
+links.forEach(x=>x.classList.remove("active"));
+this.classList.add("active");
+
+if(url.includes("sites.google.com")){
+window.location.href = url;
+return;
+}
+
+frame.src = url;
+
+});
+
+});
+</script>
+
+</body>
+</html>
