@@ -3,9 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Y Browser</title>
+<title>www.Google.com</title>
 
-<!-- Google tag (gtag.js) -->
+<!-- OneSignal -->
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+window.OneSignalDeferred = window.OneSignalDeferred || [];
+OneSignalDeferred.push(async function(OneSignal) {
+  await OneSignal.init({
+    appId: "c5536a8a-47ee-45e6-ad57-9527b045b505",
+    notifyButton: {
+      enable: true
+    }
+  });
+});
+</script>
+
+<!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0XNQDYTCYM"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -79,6 +93,7 @@ font-size:12px;
 font-weight:bold;
 }
 </style>
+
 </head>
 
 <body>
