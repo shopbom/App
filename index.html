@@ -9,13 +9,26 @@
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script>
 window.OneSignalDeferred = window.OneSignalDeferred || [];
-OneSignalDeferred.push(async function(OneSignal) {
+
+OneSignalDeferred.push(async function (OneSignal) {
+
   await OneSignal.init({
     appId: "c5536a8a-47ee-45e6-ad57-9527b045b505",
+
+    serviceWorkerPath: "OneSignalSDKWorker.js",
+    serviceWorkerUpdaterPath: "OneSignalSDKUpdaterWorker.js",
+
     notifyButton: {
       enable: true
     }
   });
+
+  const permission = await OneSignal.Notifications.permission;
+
+  if (permission !== true) {
+    await OneSignal.Notifications.requestPermission();
+  }
+
 });
 </script>
 
