@@ -14,20 +14,22 @@
 <script>
 window.OneSignalDeferred = window.OneSignalDeferred || [];
 
-OneSignalDeferred.push(async function (OneSignal) {
+OneSignalDeferred.push(async function(OneSignal){
 
-  await OneSignal.init({
-    appId: "c5536a8a-47ee-45e6-ad57-9527b045b505",
+await OneSignal.init({
 
-    notifyButton: {
-      enable: false
-    },
+appId:"c5536a8a-47ee-45e6-ad57-9527b045b505",
 
-    serviceWorkerPath: "/OneSignalSDKWorker.js",
-    serviceWorkerUpdaterPath: "/OneSignalSDKUpdaterWorker.js"
-  });
+notifyButton:{
+enable:false
+},
 
-  window.OS = OneSignal;
+serviceWorkerPath:"/OneSignalSDKWorker.js",
+serviceWorkerUpdaterPath:"/OneSignalSDKUpdaterWorker.js"
+
+});
+
+window.OS = OneSignal;
 
 });
 </script>
@@ -38,12 +40,12 @@ OneSignalDeferred.push(async function (OneSignal) {
 <script>
 window.dataLayer = window.dataLayer || [];
 
-function gtag() {
-  dataLayer.push(arguments);
+function gtag(){
+dataLayer.push(arguments);
 }
 
-gtag("js", new Date());
-gtag("config", "G-0XNQDYTCYM");
+gtag("js",new Date());
+gtag("config","G-0XNQDYTCYM");
 </script>
 
 <style>
@@ -72,8 +74,6 @@ height:calc(100% - 65px);
 border:none;
 display:none;
 }
-
-/* Welcome Screen */
 
 #welcome{
 position:fixed;
@@ -176,61 +176,38 @@ font-weight:bold;
 
 <body>
 
-<!-- Welcome Screen -->
 <div id="welcome">
-  <div id="bell">🔔</div>
 
-  <h1>Enable Notifications</h1>
+<div id="bell">🔔</div>
 
-  <p>
-    Turn on notifications to receive the latest updates,
-    offers and announcements instantly.
-  </p>
+<h1>Enable Notifications</h1>
 
-  <button id="enableBtn">
-    Allow Notifications
-  </button>
+<p>
+Turn on notifications to receive the latest updates,
+offers and announcements instantly.
+</p>
+
+<button id="enableBtn">
+Allow Notifications
+</button>
 
 </div>
 
-<iframe
-id="viewer"
-src="https://shopbom.github.io/Me/">
-</iframe><!-- Bottom Navigation -->
+<iframe id="viewer" src="https://shopbom.github.io/Me/"></iframe><div class="navigation">
 
-<div class="navigation">
-
-<a href="#" class="active"
-data-url="https://shopbom.github.io/Me/">
-
-<img class="nav-icon"
-src="https://i.ibb.co/HfyPtfpZ/file-00000000be20720692ee8230e29da463.png"
-alt="Home">
-
+<a href="#" class="active" data-url="https://shopbom.github.io/Me/">
+<img class="nav-icon" src="https://i.ibb.co/HfyPtfpZ/file-00000000be20720692ee8230e29da463.png" alt="Home">
 <span class="text">Home</span>
-
 </a>
 
-<a href="#"
-data-url="https://sites.google.com/view/bomoffer/home">
-
-<img class="nav-icon"
-src="https://i.ibb.co/d4YVmKfz/file-000000000c2472068ef64626c20e75dc.png"
-alt="Offer">
-
+<a href="#" data-url="https://sites.google.com/view/bomoffer/home">
+<img class="nav-icon" src="https://i.ibb.co/d4YVmKfz/file-000000000c2472068ef64626c20e75dc.png" alt="Offer">
 <span class="text">Offer</span>
-
 </a>
 
-<a href="#"
-data-url="https://sites.google.com/view/multigamestore/home">
-
-<img class="nav-icon"
-src="https://i.ibb.co/60ywts30/IMG-20260717-001730.png"
-alt="Y Store">
-
+<a href="#" data-url="https://sites.google.com/view/multigamestore/home">
+<img class="nav-icon" src="https://i.ibb.co/60ywts30/IMG-20260717-001730.png" alt="Y Store">
 <span class="text">Y Store</span>
-
 </a>
 
 </div>
@@ -245,91 +222,90 @@ const links = document.querySelectorAll(".navigation a");
 
 /* Bottom Navigation */
 
-links.forEach(link => {
+links.forEach(link=>{
 
-  link.addEventListener("click", function(e){
+link.addEventListener("click",function(e){
 
-    e.preventDefault();
+e.preventDefault();
 
-    const url = this.dataset.url;
+const url=this.dataset.url;
 
-    links.forEach(x => x.classList.remove("active"));
-    this.classList.add("active");
+links.forEach(x=>x.classList.remove("active"));
+this.classList.add("active");
 
-    if(url.includes("sites.google.com")){
-      window.location.href = url;
-      return;
-    }
+if(url.includes("sites.google.com")){
+window.location.href=url;
+return;
+}
 
-    viewer.src = url;
-
-  });
+viewer.src=url;
 
 });
 
-/* Show app immediately if already completed once */
+});
 
-if(localStorage.getItem("notificationShown") === "true"){
+function openApp(){
 
-  welcome.style.display = "none";
-  viewer.style.display = "block";
+welcome.style.display="none";
+viewer.style.display="block";
 
 }
 
-/* Enable Notifications */
+/* Skip welcome if already completed */
 
-enableBtn.addEventListener("click", async () => {
+if(localStorage.getItem("notificationDone")==="true"){
 
-  try{
+openApp();
 
-    if(window.OS){
+}else{
 
-      await window.OS.Notifications.requestPermission();
+async function askNotification(){
 
-    }else if("Notification" in window){
+try{
 
-      await Notification.requestPermission();
+if(window.OS){
 
-    }
+await window.OS.Notifications.requestPermission();
 
-  }catch(e){
+}else if("Notification" in window){
 
-    console.log(e);
+await Notification.requestPermission();
 
-  }
+}
 
-  /* Save only if permission is granted */
+}catch(e){
 
-  if(Notification.permission === "granted"){
+console.log(e);
 
-    localStorage.setItem("notificationShown","true");
+}
 
-  }
+localStorage.setItem("notificationDone","true");
 
-  welcome.style.display = "none";
-  viewer.style.display = "block";
+openApp();
 
-});/* If notification permission is already granted */
+}
+
+/* Allow button */
+
+enableBtn.onclick=askNotification;
+
+}/* If notification permission is already granted */
+
 if (Notification.permission === "granted") {
 
-  localStorage.setItem("notificationShown", "true");
+localStorage.setItem("notificationDone","true");
 
-  welcome.style.display = "none";
-  viewer.style.display = "block";
+openApp();
 
 }
 
 /* If notification permission is blocked */
+
 if (Notification.permission === "denied") {
 
-  welcome.innerHTML = `
-    <div id="bell">🔕</div>
-    <h1>Notifications Blocked</h1>
-    <p>Please enable notifications from your browser settings.</p>
-    <button id="enableBtn" onclick="location.reload()">
-      Retry
-    </button>
-  `;
+localStorage.setItem("notificationDone","true");
+
+openApp();
 
 }
 
@@ -337,3 +313,4 @@ if (Notification.permission === "denied") {
 
 </body>
 </html>
+
