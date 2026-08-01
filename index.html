@@ -12,42 +12,38 @@
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 
 <script>
-window.OneSignalDeferred=window.OneSignalDeferred||[];
+window.OneSignalDeferred = window.OneSignalDeferred || [];
 
-OneSignalDeferred.push(async function(OneSignal){
+OneSignalDeferred.push(async function (OneSignal) {
 
-await OneSignal.init({
+  await OneSignal.init({
+    appId: "c5536a8a-47ee-45e6-ad57-9527b045b505",
 
-appId:"c5536a8a-47ee-45e6-ad57-9527b045b505",
+    notifyButton: {
+      enable: false
+    },
 
-notifyButton:{
-enable:false
-},
+    serviceWorkerPath: "/OneSignalSDKWorker.js",
+    serviceWorkerUpdaterPath: "/OneSignalSDKUpdaterWorker.js"
+  });
 
-serviceWorkerPath:"/OneSignalSDKWorker.js",
-serviceWorkerUpdaterPath:"/OneSignalSDKUpdaterWorker.js"
-
-});
-
-window.OS=OneSignal;
+  window.OS = OneSignal;
 
 });
 </script>
 
 <!-- Google Analytics -->
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0XNQDYTCYM"></script>
 
 <script>
-window.dataLayer=window.dataLayer||[];
+window.dataLayer = window.dataLayer || [];
 
-function gtag(){
-dataLayer.push(arguments);
+function gtag() {
+  dataLayer.push(arguments);
 }
 
-gtag("js",new Date());
-
-gtag("config","G-0XNQDYTCYM");
+gtag("js", new Date());
+gtag("config", "G-0XNQDYTCYM");
 </script>
 
 <style>
@@ -61,16 +57,13 @@ font-family:Arial,sans-serif;
 
 html,
 body{
-
 width:100%;
 height:100%;
 overflow:hidden;
 background:#ffffff;
-
 }
 
 #viewer{
-
 position:fixed;
 top:0;
 left:0;
@@ -78,13 +71,11 @@ width:100%;
 height:calc(100% - 65px);
 border:none;
 display:none;
-
 }
 
 /* Welcome Screen */
 
 #welcome{
-
 position:fixed;
 top:0;
 left:0;
@@ -96,47 +87,37 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 z-index:99999;
-
 }
 
 #bell{
-
 font-size:90px;
 animation:ring 1s infinite;
-
 }
 
 @keyframes ring{
-
 0%{transform:rotate(0deg);}
 25%{transform:rotate(15deg);}
 50%{transform:rotate(-15deg);}
 75%{transform:rotate(10deg);}
 100%{transform:rotate(0deg);}
-
 }
 
 #welcome h1{
-
 color:#fff;
 margin-top:20px;
 font-size:30px;
-
 }
 
 #welcome p{
-
 color:#fff;
 padding:20px;
 text-align:center;
 font-size:16px;
 max-width:340px;
 line-height:1.5;
-
 }
 
 #enableBtn{
-
 padding:16px 30px;
 border:none;
 border-radius:50px;
@@ -146,11 +127,9 @@ font-size:18px;
 font-weight:bold;
 cursor:pointer;
 box-shadow:0 8px 25px rgba(0,0,0,.2);
-
 }
 
 .navigation{
-
 position:fixed;
 left:0;
 bottom:0;
@@ -163,18 +142,15 @@ justify-content:space-around;
 align-items:center;
 box-shadow:0 -2px 10px rgba(0,0,0,.1);
 z-index:999;
-
 }
 
 .navigation a{
-
 flex:1;
 text-align:center;
 text-decoration:none;
 color:#666;
 padding:8px 0;
 transition:.3s;
-
 }
 
 .navigation a.active{
@@ -182,13 +158,11 @@ color:#2874F0;
 }
 
 .nav-icon{
-
 width:32px;
 height:32px;
 display:block;
 margin:auto;
 margin-bottom:4px;
-
 }
 
 .text{
@@ -205,36 +179,64 @@ font-weight:bold;
 <!-- Welcome Screen -->
 <div id="welcome">
   <div id="bell">🔔</div>
+
   <h1>Enable Notifications</h1>
+
   <p>
     Turn on notifications to receive the latest updates,
     offers and announcements instantly.
   </p>
-  <button id="enableBtn">Allow Notifications</button>
+
+  <button id="enableBtn">
+    Allow Notifications
+  </button>
+
 </div>
 
-<iframe id="viewer" src="https://shopbom.github.io/Me/"></iframe>
+<iframe
+id="viewer"
+src="https://shopbom.github.io/Me/">
+</iframe><!-- Bottom Navigation -->
 
 <div class="navigation">
 
-<a href="#" class="active" data-url="https://shopbom.github.io/Me/">
-<img class="nav-icon" src="https://i.ibb.co/HfyPtfpZ/file-00000000be20720692ee8230e29da463.png" alt="Home">
+<a href="#" class="active"
+data-url="https://shopbom.github.io/Me/">
+
+<img class="nav-icon"
+src="https://i.ibb.co/HfyPtfpZ/file-00000000be20720692ee8230e29da463.png"
+alt="Home">
+
 <span class="text">Home</span>
+
 </a>
 
-<a href="#" data-url="https://sites.google.com/view/bomoffer/home">
-<img class="nav-icon" src="https://i.ibb.co/d4YVmKfz/file-000000000c2472068ef64626c20e75dc.png" alt="Offer">
+<a href="#"
+data-url="https://sites.google.com/view/bomoffer/home">
+
+<img class="nav-icon"
+src="https://i.ibb.co/d4YVmKfz/file-000000000c2472068ef64626c20e75dc.png"
+alt="Offer">
+
 <span class="text">Offer</span>
+
 </a>
 
-<a href="#" data-url="https://sites.google.com/view/multigamestore/home">
-<img class="nav-icon" src="https://i.ibb.co/60ywts30/IMG-20260717-001730.png" alt="Y Store">
+<a href="#"
+data-url="https://sites.google.com/view/multigamestore/home">
+
+<img class="nav-icon"
+src="https://i.ibb.co/60ywts30/IMG-20260717-001730.png"
+alt="Y Store">
+
 <span class="text">Y Store</span>
+
 </a>
 
 </div>
 
 <script>
+
 const viewer = document.getElementById("viewer");
 const welcome = document.getElementById("welcome");
 const enableBtn = document.getElementById("enableBtn");
@@ -242,8 +244,11 @@ const enableBtn = document.getElementById("enableBtn");
 const links = document.querySelectorAll(".navigation a");
 
 /* Bottom Navigation */
+
 links.forEach(link => {
+
   link.addEventListener("click", function(e){
+
     e.preventDefault();
 
     const url = this.dataset.url;
@@ -257,45 +262,77 @@ links.forEach(link => {
     }
 
     viewer.src = url;
+
   });
+
 });
 
+/* Show app immediately if already completed once */
+
+if(localStorage.getItem("notificationShown") === "true"){
+
+  welcome.style.display = "none";
+  viewer.style.display = "block";
+
+}
+
 /* Enable Notifications */
+
 enableBtn.addEventListener("click", async () => {
 
   try{
+
     if(window.OS){
-      /* Directly triggers the browser's native permission popup, no soft-prompt/delay */
+
       await window.OS.Notifications.requestPermission();
-    } else if("Notification" in window){
-      /* Fallback if OneSignal hasn't finished loading yet */
+
+    }else if("Notification" in window){
+
       await Notification.requestPermission();
+
     }
+
   }catch(e){
+
     console.log(e);
+
   }
 
-  /* Open Viewer Immediately */
+  /* Save only if permission is granted */
+
+  if(Notification.permission === "granted"){
+
+    localStorage.setItem("notificationShown","true");
+
+  }
+
   welcome.style.display = "none";
   viewer.style.display = "block";
 
-});
+});/* If notification permission is already granted */
+if (Notification.permission === "granted") {
 
-/* If Notification Already Allowed - skip welcome instantly */
-if(Notification.permission === "granted"){
+  localStorage.setItem("notificationShown", "true");
+
   welcome.style.display = "none";
   viewer.style.display = "block";
+
 }
 
-/* If Notification Blocked */
-if(Notification.permission === "denied"){
+/* If notification permission is blocked */
+if (Notification.permission === "denied") {
+
   welcome.innerHTML = `
     <div id="bell">🔕</div>
     <h1>Notifications Blocked</h1>
     <p>Please enable notifications from your browser settings.</p>
-    <button id="enableBtn" onclick="location.reload()">Retry</button>
+    <button id="enableBtn" onclick="location.reload()">
+      Retry
+    </button>
   `;
+
 }
+
 </script>
 
 </body>
